@@ -93,12 +93,12 @@ complexity.
 
 #Installation
 
-    1. Install pandoc. This package can be found in the repositiories of many
+1. Install pandoc. This package can be found in the repositiories of many
        Linux distributions.
 
-    2. Clone this repository to wherever you want your blog to exist.
+2. Clone this repository to wherever you want your blog to exist.
 
-    3. Modify `source/header.html` and `source/footer.html` to match your needs
+3. Modify `source/header.html` and `source/footer.html` to match your needs
 
 
 
