@@ -15,5 +15,5 @@ if [[ "$confirm" = "y" ]]; then
     rm "source/post_blurb/$postid"
     rm "source/post_content/$postid.html"
     sed -i "\%${postid}% { d }" source/post_list
-    ./makeIndices.sh
+    ./makeIndices
 fi

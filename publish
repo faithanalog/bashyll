@@ -7,7 +7,7 @@ fi
 
 file="$1"
 
-title="$(./getPostTitle.sh < "$file")"
+title="$(./getPostTitle < "$file")"
 
 #Gets the blurb for the post.
 #1. Skip the title line
@@ -25,7 +25,7 @@ blurb="$(tail -n +2 < "$file" \
 date="$(date '+%b %d, %Y')"
 
 #Replace spaces with dashes in the title, and lowercase it
-postid="$(echo $title | ./getPostID.sh)"
+postid="$(echo $title | ./getPostID)"
 
 echo "ID: $postid"
 echo "Title: $title"
@@ -52,10 +52,10 @@ fi
 
 #Regenerate blurb when editing posts
 echo -n $blurb > "source/post_blurb/$postid"
-./generatePostHtml.sh "$file" "$postid"
+./generatePostHtml "$file" "$postid"
 
 POST="source/post_content/$postid.html" \
 TITLE="$title"
-    ./makePost.sh > "./public/posts/$postid.html"
+    ./makePost > "./public/posts/$postid.html"
 
-./makeIndices.sh
+./makeIndices
