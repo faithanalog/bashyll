@@ -1,5 +1,4 @@
 #Bash Static Blog Generator
-===========================
 
 Static blog generator written with bash and pandoc. Small pages, fast load
 times and 100% cachable content.
@@ -10,7 +9,6 @@ but because BASHyll looks sort of like BASHell if you squint hard enough, and
 this project uses the Bourne-Again SHell.
 
 #Table Of Contents
-==================
 
 * [Rationale](#rationale)
   * [Why Bash?](#why-bash)
@@ -39,7 +37,6 @@ this project uses the Bourne-Again SHell.
 
 
 #Rationale
-==========
 
 There's a lot of good static site generators out there these days, but most of
 them require an external language to installed to use, and are far more complex
@@ -48,7 +45,6 @@ provide an easy to use static blog generator, with minimal dependencies.
 
 
 ##Why Bash?
------------
 
 Originally, this project started simply as an experiment, under the
 assumption that writing a blog generator would be more difficult than it ended
@@ -58,7 +54,6 @@ templating language (see `makePost` for an example of this).
 
 
 ##Why Solarized?
-----------------
 
 I know a lot of people don't like low-contrast color schemes like Solarized. I'm
 working on putting together a new higher-contrast color scheme to use as the
@@ -68,7 +63,6 @@ project.
 
 
 ##Why is the CSS included inline?
----------------------------------
 
 CSS is included inline on each page to reduce a full page load to a single HTTP
 request (excluding images). This allows the page to be fully rendered quicker,
@@ -84,7 +78,6 @@ page reflow once loaded.
 
 
 ##Why isn't anything minified?
-------------------------------
 
 GZIP does a very good job of compressing posts as it is, and the difference
 in size between minified and unminified content is minimal. Even without gzip,
@@ -96,7 +89,6 @@ complexity.
 
 
 #Installation
-=============
 
     1. Install pandoc. This package can be found in the repositiories of many
        Linux distributions.
@@ -108,7 +100,6 @@ complexity.
 
 
 #Usage
-======
 
 Because this is a static site generator, you can use any web server you want
 to host your site. Simply use `public/` as the root directory of your site, and
@@ -116,7 +107,6 @@ follow the documentation below for instructions on how to generate pages.
 
 
 ##Post Format
--------------
 
 Posts are written in Markdown, and processed using pandoc. See pandoc's
 documentation at http://pandoc.org/MANUAL.html#pandocs-markdown for further
@@ -124,7 +114,6 @@ details
 
 
 ##Syntax Highlighting
----------------------
 
 Pandoc will wrap code with syntax-highlighting HTML if you provide a language
 name with your code block like so:
@@ -142,7 +131,6 @@ based on them. https://github.com/jgm/highlighting-kate/tree/master/css
 
 
 ##Including Images And Other Custom Content
--------------------------------------------
 
 Because pandoc allows you to write arbitrary HTML directly in your markdown, you
 may simply write the HTML required for your custom content. In the case of
@@ -155,7 +143,6 @@ content you wish to include in your posts.
 
 
 ##Content Control Scripts
--------------------------
 
 All control is done using the provided shell scripts. However, before we begin,
 it is important to note that it is *imperative* that you do not modify the first
@@ -169,7 +156,6 @@ fixed one.
 
 
 ###publish
-----------
 
 `publish` takes a path to the markdown file you wish to publish. You should
 your markdown files in the `posts` folder for the blog system to work.
@@ -186,7 +172,6 @@ post. The post date will remain the same, while the content will be updated.
 
 
 ###unpublish
-------------
 
 `unpublish` takes a path to the markdown file containing the source of the
 post you wish to unpublish. It will remove the generated HTML, as well as the
@@ -201,7 +186,6 @@ pages.
 
 
 ###idUnpublish
---------------
 
 `idUnpublish` does all the heavy lifting of unpublishing your post, and is
 infact used by `unpublish`. It takes a post ID as an argument rather than a
@@ -215,7 +199,6 @@ file name.
 
 
 ###makeBlog
------------
 
 `makeBlog` executes regenPosts and makeIndices. This is useful for
 updating pages after modifying CSS in the `source/` folder, or if you've deleted
@@ -231,7 +214,6 @@ more convenient to do.
 
 
 ###makeIndices
---------------
 
 `makeIndices` is used to generate the `index.html` and `posts.html` pages.
 The `index.html` page lists the five most recent posts, while `posts.html`
@@ -246,7 +228,6 @@ under normal circumstances.
 
 
 ###regenPosts
--------------
 
 `regenPosts` will regenerate the HTML for all published posts. This requires
 the post markdown files still exist in `posts/`. This script does not need to be
@@ -260,7 +241,6 @@ executed manually under normal circumstances.
 
 
 ###generatePostHtml
--------------------
 
 `generatePostHtml` generates the HTML for the content of a post, before it is
 converted to a full page with the post template. This script does not need to be
@@ -274,7 +254,6 @@ executed manually under normal circumstances.
 
 
 ###getPostTitle
----------------
 
 `getPostTitle` reads the first line of a post's content from STDIN and
 extracts the title from that line by removing any leading '#' characters.
@@ -287,7 +266,6 @@ extracts the title from that line by removing any leading '#' characters.
 
 
 ###getPostID
-------------
 
 `getPostID` reads the title of a post from STDIN, replaces spaces with
 dashes, converts the title to lowercase, and writes the result to STDOUT
@@ -301,7 +279,6 @@ dashes, converts the title to lowercase, and writes the result to STDOUT
 
 
 ##Modifying Templates and Themes
---------------------------------
 
 Templating, like everything else, is done using bash. Feel free to modify
 `makePost` and `makeIndex` to change the resulting HTML to suit your
@@ -319,7 +296,6 @@ of pages.
 
 
 #Internal File Structure
-========================
 
 Below is the file structure of the project, excluding script files.
 
