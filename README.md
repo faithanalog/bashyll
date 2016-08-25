@@ -8,6 +8,9 @@ entirely unrelated. Bashyll was chosen as a name not just to reference Jekyll,
 but because BASHyll looks sort of like BASHell if you squint hard enough, and
 this project uses the Bourne-Again SHell.
 
+An blog using this project, which may serve as an example blog, can be found at
+https://github.com/unknownloner/ukl.me
+
 #Table Of Contents
 
 * [Rationale](#rationale)
