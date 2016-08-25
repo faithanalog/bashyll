@@ -4,6 +4,11 @@
 Static blog generator written with bash and pandoc. Small pages, fast load
 times and 100% cachable content.
 
+While the name is a reference to the Jekyll site generator, the workflow is
+entirely unrelated. Bashyll was chosen as a name not just to reference Jekyll,
+but because BASHyll looks sort of like BASHell if you squint hard enough, and
+this project uses the Bourne-Again SHell.
+
 #Table Of Contents
 ==================
 
