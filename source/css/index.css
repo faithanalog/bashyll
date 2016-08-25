@@ -1,0 +1,24 @@
+h2 {
+    margin-bottom: 0px;
+}
+
+h5 {
+    margin-top: 0.1em;
+}
+
+.post-title a {
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-blurb a {
+    color: #657b83;
+    text-decoration: none;
+}
+
+.post-blurb a:hover {
+    text-decoration: underline;
+}
