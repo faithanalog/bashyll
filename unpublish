@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ $# < 1 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    echo "Usage: $0 <path-to-post>"
+    exit 1
+fi
+
+title="$(./getPostTitle.sh < "$1")"
+postid="$(echo $title | ./getPostID.sh)"
+./unpublish.sh "$postid"

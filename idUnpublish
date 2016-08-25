@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+if [[ $# < 1 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    echo "Usage: $0 <post-id>"
+    exit 1
+fi
+
 postid="$1"
 
 echo -n "Unpublish $postid? [y/N] "

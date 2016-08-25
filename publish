@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+if [[ $# < 1 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    echo "Usage: $0 <path-to-post>"
+    exit 1
+fi
+
+
 file="$1"
 
 title="$(./getPostTitle.sh < "$file")"

@@ -4,6 +4,33 @@
 Static blog generator written with bash and pandoc. Small pages, fast load
 times and 100% cachable content.
 
+#Table Of Contents
+==================
+
+* [Rationale](#rationale)
+  * [Why Bash?](#why-bash)
+  * [Why Solarized?](#why-solarized)
+  * [Why is the CSS included inline?](#why-is-the-css-included-inline)
+  * [Why isn't anything minified?](#why-isnt-anything-minified)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Post Format](#post-format)
+  * [Syntax Highlighting](#syntax-highlighting)
+  * [Including Images And Other Custom Content](#including-images-and-other-custom-content)
+  * [Content Control Scripts](#content-control-scripts)
+    * [publish](#publish)
+    * [unpublish](#unpublish)
+    * [idUnpublish](#idunpublish)
+    * [makeBlog](#makeblog)
+    * [makeIndices](#makeindices)
+    * [regenPosts](#regenposts)
+    * [generatePostHtml](#generateposthtml)
+    * [getPostTitle](#getposttitle)
+    * [getPostID](#getpostid)
+  * [Modifying Templates And Themes](#modifying-templates-and-themes)
+* [Internal File Structure](#internal-file-structure)
+
+
 
 
 #Rationale
@@ -22,7 +49,17 @@ Originally, this project started simply as an experiment, under the
 assumption that writing a blog generator would be more difficult than it ended
 up being. However, bash does have the advantage of being available on most unix
 systems already, and it turns out that bash works pretty painlessly as a
-templating language (see `makePost.sh` for an example of this).
+templating language (see `makePost` for an example of this).
+
+
+##Why Solarized?
+----------------
+
+I know a lot of people don't like low-contrast color schemes like Solarized. I'm
+working on putting together a new higher-contrast color scheme to use as the
+default, and for my blog, but since Solarized is the color scheme I use on my
+blog right now, it's also what I'm including in the first upload of this
+project.
 
 
 ##Why is the CSS included inline?
@@ -52,6 +89,7 @@ complexity.
 
 
 
+
 #Installation
 =============
 
@@ -59,6 +97,8 @@ complexity.
        Linux distributions.
 
     2. Clone this repository to wherever you want your blog to exist.
+
+    3. Modify `source/header.html` and `source/footer.html` to match your needs
 
 
 
@@ -117,149 +157,149 @@ it is important to note that it is *imperative* that you do not modify the first
 line of the page's markdown file after initially publishing it, as the post ID
 used internally is derived from the title of a post, which in turn is derived
 from the first line in the post file. Modifying your post's title after
-publshing it will cause `publish.sh` to treat the post as if it were a new post,
+publshing it will cause `publish` to treat the post as if it were a new post,
 rather than an edited post. Therefore if you've made a mistake in your post's
 title, unpublish the old post before fixing the mistake and publishing the
 fixed one.
 
 
-###publish.sh
--------------
+###publish
+----------
 
-`publish.sh` takes a path to the markdown file you wish to publish. You should
+`publish` takes a path to the markdown file you wish to publish. You should
 your markdown files in the `posts` folder for the blog system to work.
 
-`publish.sh` will generate metadata used by the other scripts, and generate HTML
+`publish` will generate metadata used by the other scripts, and generate HTML
 in the `public/` folder. Publishing an existing post will allow you to edit that
 post. The post date will remain the same, while the content will be updated.
 
     Syntax:
-        ./publish.sh <path-to-post>
+        ./publish <path-to-post>
 
     Example:
-        ./publish.sh posts/HelloWorld.md
+        ./publish posts/HelloWorld.md
 
 
-###unpublish.sh
----------------
+###unpublish
+------------
 
-`unpublish.sh` takes a path to the markdown file containing the source of the
+`unpublish` takes a path to the markdown file containing the source of the
 post you wish to unpublish. It will remove the generated HTML, as well as the
 post metadata stored in the `source/` folder, and then regenerate the index
 pages.
 
     Syntax:
-        ./unpublish.sh <path-to-post>
+        ./unpublish <path-to-post>
 
     Example:
-        ./unpublish.sh posts/HelloWorld.md
+        ./unpublish posts/HelloWorld.md
 
 
-###idUnpublish.sh
------------------
+###idUnpublish
+--------------
 
-`idUnpublish.sh` does all the heavy lifting of unpublishing your post, and is
-infact used by `unpublish.sh`. It takes a post ID as an argument rather than a
+`idUnpublish` does all the heavy lifting of unpublishing your post, and is
+infact used by `unpublish`. It takes a post ID as an argument rather than a
 file name.
 
     Syntax:
-        ./idUnpublish.sh <post-id>
+        ./idUnpublish <post-id>
 
     Example:
-        ./idUnpublish.sh hello-world
+        ./idUnpublish hello-world
 
 
-###makeBlog.sh
---------------
+###makeBlog
+-----------
 
-`makeBlog.sh` executes regenPosts.sh and makeIndices.sh. This is useful for
+`makeBlog` executes regenPosts and makeIndices. This is useful for
 updating pages after modifying CSS in the `source/` folder, or if you've deleted
 your content in the `public/` folder. It's recommended to use this rather than
-running `makeIndices.sh` and `regenPosts.sh` separately, simply because it's
+running `makeIndices` and `regenPosts` separately, simply because it's
 more convenient to do.
 
     Syntax:
-        ./makeBlog.sh
+        ./makeBlog
 
     Example:
-        ./makeBlog.sh
+        ./makeBlog
 
 
-###makeIndices.sh
------------------
+###makeIndices
+--------------
 
-`makeIndices.sh` is used to generate the `index.html` and `posts.html` pages.
+`makeIndices` is used to generate the `index.html` and `posts.html` pages.
 The `index.html` page lists the five most recent posts, while `posts.html`
 lists all posts on the site. This script does not need to be executed manually
 under normal circumstances.
 
     Syntax:
-        ./makeIndices.sh
+        ./makeIndices
 
     Example:
-        ./makeIndices.sh
+        ./makeIndices
 
 
-###regenPosts.sh
-----------------
+###regenPosts
+-------------
 
-`regenPosts.sh` will regenerate the HTML for all published posts. This requires
+`regenPosts` will regenerate the HTML for all published posts. This requires
 the post markdown files still exist in `posts/`. This script does not need to be
 executed manually under normal circumstances.
 
     Syntax:
-        ./regenPosts.sh
+        ./regenPosts
 
     Example:
-        ./regenPosts.sh
+        ./regenPosts
 
 
-###generatePostHtml.sh
-----------------------
+###generatePostHtml
+-------------------
 
-`generatePostHtml.sh` generates the HTML for the content of a post, before it is
+`generatePostHtml` generates the HTML for the content of a post, before it is
 converted to a full page with the post template. This script does not need to be
 executed manually under normal circumstances.
 
     Syntax:
-        ./generatePostHtml.sh <input-file> <post-id>
+        ./generatePostHtml <input-file> <post-id>
 
     Example:
-        ./generatePostHtml.sh posts/HelloWorld.md hello-world
+        ./generatePostHtml posts/HelloWorld.md hello-world
 
 
-###getPostTitle.sh
-------------------
+###getPostTitle
+---------------
 
-`getPostTitle.sh` reads the first line of a post's content from STDIN and
+`getPostTitle` reads the first line of a post's content from STDIN and
 extracts the title from that line by removing any leading '#' characters.
 
     Syntax:
-        ./getPostTitle.sh
+        ./getPostTitle
 
     Example:
-        ./getPostTitle.sh < posts/HelloWorld.md
+        ./getPostTitle < posts/HelloWorld.md
 
 
-###getPostID.sh
----------------
+###getPostID
+------------
 
-`getPostID.sh` reads the title of a post from STDIN, replaces spaces with
+`getPostID` reads the title of a post from STDIN, replaces spaces with
 dashes, converts the title to lowercase, and writes the result to STDOUT
 
     Sytax:
-        ./getPostID.sh
+        ./getPostID
 
     Example:
-        ./getPostTitle.sh < posts/HelloWorld.md | ./getPostID.sh
+        ./getPostTitle < posts/HelloWorld.md | ./getPostID
 
 
 
 ##Modifying Templates and Themes
--------------------------------
+--------------------------------
 
 Templating, like everything else, is done using bash. Feel free to modify
-`makePost.sh` and `makeIndex.sh` to change the resulting HTML to suit your
+`makePost` and `makeIndex` to change the resulting HTML to suit your
 needs.
 
 However, simpler modifications may be done by editing `source/header.html` and

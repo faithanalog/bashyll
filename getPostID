@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #Reads title from STDIN
 #Replace spaces with dashes in the title, and convert to lowercase

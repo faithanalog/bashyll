@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 find ./posts -type f \
     | while read postfile; do
         title="$(./getPostTitle.sh < "$postfile")"
