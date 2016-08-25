@@ -1,2 +1,3 @@
 #Placeholder .gitignore to keep this folder tracked by git
+*
 !.gitignore
