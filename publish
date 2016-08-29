@@ -13,12 +13,16 @@ title="$(./getPostTitle < "$file")"
 #1. Skip the title line
 #2. Filter out empty lines
 #3. Replace newlines with spaces
-#4. Take the first 200 characters
-#5. Remove the last word to prevent partial words
-#6. Add "..."
+#4. Remove all sets of '=' or '-' longer than 4 characters, as those are
+#   probably part of the title
+#5. Take the first 200 characters
+#6. Remove the last word to prevent partial words
+#7. Add "..."
 blurb="$(tail -n +2 < "$file" \
     | awk '/[^\s]+/' \
     | tr '\n' ' ' \
+    | sed -r 's/===[=]+//g' \
+    | sed -r 's/---[-]+//g' \
     | head -c 200 \
     | sed -r 's/\s[^\s]+$//g')..."
 
