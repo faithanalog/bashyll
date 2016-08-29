@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
 #Reads title from STDIN
-#Replace spaces with dashes in the title, and convert to lowercase
-tr '[:upper:]' '[:lower:]' | tr ' ' '-'
+#Replace spaces with dashes
+#Replace slashes with dashes
+#Convert to lowercase
+tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr '/' '-'
