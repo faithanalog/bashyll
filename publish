@@ -26,7 +26,7 @@ blurb="$(tail -n +2 < "$file" \
     | sed -r 's/\[([^]]*)\]\([^)]*\)/\1/g' \
     | tr '\n' ' ' \
     | head -c 200 \
-    | sed -r 's/\s[^\s]+$//g')..."
+    | sed -r 's/\s[^[:space:]]+$//g')..."
 
 date="$(date '+%b %d, %Y')"
 
