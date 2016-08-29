@@ -10,19 +10,21 @@ file="$1"
 title="$(./getPostTitle < "$file")"
 
 #Gets the blurb for the post.
-#1. Skip the title line
-#2. Filter out empty lines
-#3. Replace newlines with spaces
-#4. Remove all sets of '=' or '-' longer than 4 characters, as those are
-#   probably part of the title
-#5. Take the first 200 characters
-#6. Remove the last word to prevent partial words
-#7. Add "..."
+#* Skip the title line
+#* Filter out empty lines
+#* Remove all sets of '=' or '-' longer than 4 characters, as those are
+#  probably part of the title
+#* Convert links to text
+#* Replace newlines with spaces
+#* Take the first 200 characters
+#* Remove the last word to prevent partial words
+#* Add "..."
 blurb="$(tail -n +2 < "$file" \
     | awk '/[^\s]+/' \
-    | tr '\n' ' ' \
     | sed -r 's/===[=]+//g' \
     | sed -r 's/---[-]+//g' \
+    | sed -r 's/\[([^]]*)\]\([^)]*\)/\1/g' \
+    | tr '\n' ' ' \
     | head -c 200 \
     | sed -r 's/\s[^\s]+$//g')..."
 
