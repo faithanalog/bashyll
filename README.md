@@ -56,15 +56,6 @@ systems already, and it turns out that bash works pretty painlessly as a
 templating language (see `makePost` for an example of this).
 
 
-##Why Solarized?
-
-I know a lot of people don't like low-contrast color schemes like Solarized. I'm
-working on putting together a new higher-contrast color scheme to use as the
-default, and for my blog, but since Solarized is the color scheme I use on my
-blog right now, it's also what I'm including in the first upload of this
-project.
-
-
 ##Why is the CSS included inline?
 
 CSS is included inline on each page to reduce a full page load to a single HTTP
