@@ -1,4 +1,4 @@
-#Bash Static Blog Generator
+# Bash Static Blog Generator
 
 Mobile-friendly static blog generator written with bash and pandoc. Small
 pages, fast load times and cachable content.
@@ -11,7 +11,7 @@ this project uses the Bourne-Again SHell.
 A blog using this project, which may serve as an example blog, can be found at
 https://github.com/unknownloner/ukl.me
 
-#Table Of Contents
+# Table Of Contents
 
 * [Rationale](#rationale)
   * [Why Bash?](#why-bash)
@@ -39,7 +39,7 @@ https://github.com/unknownloner/ukl.me
 
 
 
-#Rationale
+# Rationale
 
 There's a lot of good static site generators out there these days, but most of
 them require an external language to installed to use, and are far more complex
@@ -47,7 +47,7 @@ than necessary for a simple blog with static post content. This project aims to
 provide an easy to use static blog generator, with minimal dependencies.
 
 
-##Why Bash?
+## Why Bash?
 
 Originally, this project started simply as an experiment, under the
 assumption that writing a blog generator would be more difficult than it ended
@@ -56,7 +56,7 @@ systems already, and it turns out that bash works pretty painlessly as a
 templating language (see `makePost` for an example of this).
 
 
-##Why is the CSS included inline?
+## Why is the CSS included inline?
 
 CSS is included inline on each page to reduce a full page load to a single HTTP
 request (excluding images). This allows the page to be fully rendered quicker,
@@ -71,7 +71,7 @@ highlighting CSS rather than including it inline, as that should not cause a
 page reflow once loaded.
 
 
-##Why isn't anything minified?
+## Why isn't anything minified?
 
 GZIP does a very good job of compressing posts as it is, and the difference
 in size between minified and unminified content is minimal. Even without gzip,
@@ -82,7 +82,7 @@ complexity.
 
 
 
-#Installation
+# Installation
 
 1. Install pandoc. This package can be found in the repositiories of many
        Linux distributions.
@@ -93,21 +93,21 @@ complexity.
 
 
 
-#Usage
+# Usage
 
 Because this is a static site generator, you can use any web server you want
 to host your site. Simply use `public/` as the root directory of your site, and
 follow the documentation below for instructions on how to generate pages.
 
 
-##Post Format
+## Post Format
 
 Posts are written in Markdown, and processed using pandoc. See pandoc's
 documentation at http://pandoc.org/MANUAL.html#pandocs-markdown for further
 details
 
 
-##Syntax Highlighting
+## Syntax Highlighting
 
 Pandoc will wrap code with syntax-highlighting HTML if you provide a language
 name with your code block like so:
@@ -124,7 +124,7 @@ can use one of the style sheets found at the following link, or create your own
 based on them. https://github.com/jgm/highlighting-kate/tree/master/css
 
 
-##Including Images And Other Custom Content
+## Including Images And Other Custom Content
 
 Because pandoc allows you to write arbitrary HTML directly in your markdown, you
 may simply write the HTML required for your custom content. In the case of
@@ -136,7 +136,7 @@ It may be best to create a folder within the `public/` folder to contain static
 content you wish to include in your posts.
 
 
-##Content Control Scripts
+## Content Control Scripts
 
 All control is done using the provided shell scripts. However, before we begin,
 it is important to note that it is *imperative* that you do not modify the first
@@ -149,7 +149,7 @@ title, unpublish the old post before fixing the mistake and publishing the
 fixed one.
 
 
-###publish
+### publish
 
 `publish` takes a path to the markdown file you wish to publish. You should
 your markdown files in the `posts` folder for the blog system to work.
@@ -165,7 +165,7 @@ post. The post date will remain the same, while the content will be updated.
         ./publish posts/HelloWorld.md
 
 
-###unpublish
+### unpublish
 
 `unpublish` takes a path to the markdown file containing the source of the
 post you wish to unpublish. It will remove the generated HTML, as well as the
@@ -179,7 +179,7 @@ pages.
         ./unpublish posts/HelloWorld.md
 
 
-###idUnpublish
+### idUnpublish
 
 `idUnpublish` does all the heavy lifting of unpublishing your post, and is
 infact used by `unpublish`. It takes a post ID as an argument rather than a
@@ -192,7 +192,7 @@ file name.
         ./idUnpublish hello-world
 
 
-###makeBlog
+### makeBlog
 
 `makeBlog` executes regenPosts and makeIndices. This is useful for
 updating pages after modifying CSS in the `source/` folder, or if you've deleted
@@ -207,7 +207,7 @@ more convenient to do.
         ./makeBlog
 
 
-###makeIndices
+### makeIndices
 
 `makeIndices` is used to generate the `index.html` and `posts.html` pages.
 The `index.html` page lists the five most recent posts, while `posts.html`
@@ -221,7 +221,7 @@ under normal circumstances.
         ./makeIndices
 
 
-###regenPosts
+### regenPosts
 
 `regenPosts` will regenerate the HTML for all published posts. This requires
 the post markdown files still exist in `posts/`. This script does not need to be
@@ -234,7 +234,7 @@ executed manually under normal circumstances.
         ./regenPosts
 
 
-###generatePostHtml
+### generatePostHtml
 
 `generatePostHtml` generates the HTML for the content of a post, before it is
 converted to a full page with the post template. This script does not need to be
@@ -247,7 +247,7 @@ executed manually under normal circumstances.
         ./generatePostHtml posts/HelloWorld.md hello-world
 
 
-###getPostTitle
+### getPostTitle
 
 `getPostTitle` reads the first line of a post's content from STDIN and
 extracts the title from that line by removing any leading '#' characters.
@@ -259,7 +259,7 @@ extracts the title from that line by removing any leading '#' characters.
         ./getPostTitle < posts/HelloWorld.md
 
 
-###getPostID
+### getPostID
 
 `getPostID` reads the title of a post from STDIN, replaces spaces with
 dashes, converts the title to lowercase, and writes the result to STDOUT
@@ -272,7 +272,7 @@ dashes, converts the title to lowercase, and writes the result to STDOUT
 
 
 
-##Modifying Templates and Themes
+## Modifying Templates and Themes
 
 Templating, like everything else, is done using bash. Feel free to modify
 `makePost` and `makeIndex` to change the resulting HTML to suit your
@@ -289,7 +289,7 @@ of pages.
 
 
 
-#Internal File Structure
+# Internal File Structure
 
 Below is the file structure of the project, excluding script files.
 
