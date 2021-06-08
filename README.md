@@ -8,14 +8,12 @@ entirely unrelated. Bashyll was chosen as a name not just to reference Jekyll,
 but because BASHyll looks sort of like BASHell if you squint hard enough, and
 this project uses the Bourne-Again SHell.
 
-A blog using this project, which may serve as an example blog, can be found at
-https://github.com/unknownloner/ukl.me
+I used to use this project for my personal blog; you can see that old code [in an old commit to my ukl.me repo](https://github.com/faithanalog/ukl.me/tree/bdfe82d1e02378b8b59db01b910676b944833a43)
 
 # Table Of Contents
 
 * [Rationale](#rationale)
   * [Why Bash?](#why-bash)
-  * [Why Solarized?](#why-solarized)
   * [Why is the CSS included inline?](#why-is-the-css-included-inline)
   * [Why isn't anything minified?](#why-isnt-anything-minified)
 * [Installation](#installation)
