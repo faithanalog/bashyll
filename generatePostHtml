@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # $1 = Input file
 # $2 = Post ID
-if [[ $# < 2 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+if [[ $# -lt 2 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
     echo "Usage: $0 <path-to-post> <post-id>"
     exit 1
 fi
