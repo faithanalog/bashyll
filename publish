@@ -61,7 +61,7 @@ echo -n $blurb > "source/post_blurb/$postid"
 ./generatePostHtml "$file" "$postid"
 
 POST="source/post_content/$postid.html" \
-TITLE="$title"
+TITLE="$title" \
     ./makePost > "./public/posts/$postid.html"
 
 ./makeIndices
