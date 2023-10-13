@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 #STDIN = post content
-head -n 1 | sed -r 's/^#+//g'
+head -n 1 | sed -r 's/^[# ]+//g'
