@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 find ./posts -type f \
-    | while read postfile; do
+    | while read -r postfile; do
         title="$(./getPostTitle < "$postfile")"
-        postid="$(echo $title | ./getPostID)" 
+        postid="$(echo "$title" | ./getPostID)" 
         if grep "$postid" "source/post_list" &> /dev/null; then
             echo "Regenerating $postid"
             ./generatePostHtml "$postfile" "$postid"

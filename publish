@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ $# < 1 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+if [[ $# -lt 1 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
     echo "Usage: $0 <path-to-post>"
     exit 1
 fi
@@ -31,7 +31,7 @@ blurb="$(tail -n +2 < "$file" \
 date="$(date '+%b %d, %Y')"
 
 #Replace spaces with dashes in the title, and lowercase it
-postid="$(echo $title | ./getPostID)"
+postid="$(echo "$title" | ./getPostID)"
 
 echo "ID: $postid"
 echo "Title: $title"
@@ -40,28 +40,28 @@ echo ""
 
 if grep "$postid" "source/post_list" &> /dev/null; then
     echo -n "Post exists with ID '$postid'. Update post? [y/N] "
-    read confirm_post
+    read -r confirm_post
     if [[ "$confirm_post" != "y" ]]; then
         exit 1
     fi
 else
     echo -n "Are you sure you want to post '$title'? [y/N] "
-    read confirm_post
+    read -r confirm_post
     if [[ "$confirm_post" != "y" ]]; then
         exit 1
     else
-        echo -n $title > "source/post_title/$postid"
-        echo -n $date > "source/post_date/$postid"
-        echo $postid >> "source/post_list"
+        echo -n "$title" > "source/post_title/$postid"
+        echo -n "$date" > "source/post_date/$postid"
+        echo "$postid" >> "source/post_list"
     fi
 fi
 
 #Regenerate blurb when editing posts
-echo -n $blurb > "source/post_blurb/$postid"
+echo -n "$blurb" > "source/post_blurb/$postid"
 ./generatePostHtml "$file" "$postid"
 
 POST="source/post_content/$postid.html" \
-TITLE="$title"
+TITLE="$title" \
     ./makePost > "./public/posts/$postid.html"
 
 ./makeIndices
